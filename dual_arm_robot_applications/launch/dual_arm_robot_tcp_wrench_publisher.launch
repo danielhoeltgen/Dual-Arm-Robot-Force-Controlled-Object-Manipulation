@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+  <param name="ur5/base" type="str" value="ur5_base"/>
+  <param name="ur10/base" type="str" value="ur10_base"/>
+  <param name="ur5/tool" type="str" value="ur5_tool0"/>
+  <param name="ur10/tool" type="str" value="ur10_tool0"/>
+  
+  <node name="tcp_wrench_publisher" pkg="dual_arm_robot_applications" type="tcp_wrench_publisher" respawn="true" output="screen" ns="ur5"/>
+  <node name="tcp_wrench_publisher" pkg="dual_arm_robot_applications" type="tcp_wrench_publisher" respawn="true" output="screen" ns="ur10"/>
+
+  <!--node name="dual_arm_robot_logger" pkg="dual_arm_robot_applications" type="dual_arm_robot_logger" respawn="false" output="screen" cwd="node"/-->
+</launch>

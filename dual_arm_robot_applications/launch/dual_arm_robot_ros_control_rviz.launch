@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!-- note: controllers.yaml in moveit_config has to be setup for specific controller -->
+<launch>
+  <!-- robot_ip: IP-address of the robot's socket-messaging server -->
+  <arg name="ip_ur5" default="10.64.9.82"/> <!-- IP des UR5 am IML eingetragen -->
+  <arg name="ip_ur10" default="10.64.9.83"/> <!-- IP des UR10 am IML eingetragen -->
+  <!-- for limited setup: make sure that both robots are in vailid position, otherwise ompl throws an error -->
+  <arg name="limited" default="true"/>
+  <arg name="min_payload_ur5"  default="0.0"/>
+  <arg name="max_payload_ur5"  default="5.0"/>
+  <arg name="min_payload_ur10"  default="0.0"/>
+  <arg name="max_payload_ur10"  default="10.0"/>
+  <arg name="prefix_ur5" default="ur5_"/>
+  <arg name="prefix_ur10" default="ur10_"/>
+  <arg name="config" default="true"/>
+  
+  <!-- dual_arm_robot bringup. including ros controllers -->
+  <include file="$(find dual_arm_robot_driver)/launch/dual_arm_robot_bringup_ros_control.launch">
+    <arg name="ip_ur5" value="$(arg ip_ur5)"/>
+    <arg name="ip_ur10" value="$(arg ip_ur10)"/>
+    <arg name="limited_ur5" value="$(arg limited)"/>
+    <arg name="limited_ur10" value="$(arg limited)"/>
+    <arg name="min_payload_ur5"  value="$(arg min_payload_ur5)"/>
+    <arg name="max_payload_ur5"  value="$(arg max_payload_ur5)"/>
+    <arg name="min_payload_ur10"  value="$(arg min_payload_ur10)"/>
+    <arg name="max_payload_ur10"  value="$(arg max_payload_ur10)"/>
+    <arg name="prefix_ur5" value="$(arg prefix_ur5)"/>
+    <arg name="prefix_ur10" value="$(arg prefix_ur10)"/>
+  </include>
+
+  <!-- MoveIt! Setup -->
+  <!-- dual arm robot planning execution -->
+  <include file="$(find dual_arm_robot_moveit_config)/launch/dual_arm_robot_moveit_planning_execution.launch"/>
+  <param name="move_group/trajectory_execution/allowed_start_tolerance" value="0.5" />
+
+  <!-- dual arm robot rviz moveit -->
+  <include file="$(find dual_arm_robot_moveit_config)/launch/moveit_rviz.launch">
+    <arg name="config" value="$(arg config)"/>
+  </include>
+
+</launch>
