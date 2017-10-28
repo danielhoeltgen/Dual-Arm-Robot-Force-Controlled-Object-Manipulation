@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<robot xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+       xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+       xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+       xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:macro name="endeffector" params="prefix">
+  <link name="${prefix}ee_frame">
+    <visual>
+      <geometry>
+        <mesh filename="package://dual_arm_robot_description/meshes/endeffector/ee_frame.stl"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <origin rpy="0 0 0" xyz="0.3 0 0"/>
+    <collision>
+      <geometry>
+        <mesh filename="package://dual_arm_robot_description/meshes/endeffector/ee_frame.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="${prefix}ee_spring">
+    <visual>
+      <geometry>
+        <mesh filename="package://dual_arm_robot_description/meshes/endeffector/ee_spring.stl"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0 0 0 1"/>
+      </material>
+    </visual>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <collision>
+      <geometry>
+        <mesh filename="package://dual_arm_robot_description/meshes/endeffector/ee_spring.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="${prefix}ee_frame_to_spring" type="fixed">
+    <parent link="${prefix}ee_frame"/>
+    <child link="${prefix}ee_spring"/>
+    <origin xyz="0 0 0.009"/>
+  </joint>
+
+  <link name="${prefix}ee_0"/>
+
+  <joint name="${prefix}ee_spring_to_0" type="fixed">
+    <parent link="${prefix}ee_spring"/>
+    <child link="${prefix}ee_0"/>
+    <origin xyz="0 0 0.021"/>
+  </joint>
+
+  </xacro:macro>
+</robot>

@@ -1,0 +1,31 @@
+EXPORT PYTHON PATH
+export PYTHONPATH=$PYTHONPATH:`openrave-config --python-dir`
+
+ROUND COLLADA VALUES
+rosrun moveit_ikfast round_collada_numbers.py dual_arm_robot.dae dual_arm_robot.rounded.dae 5
+
+CREATE IK FAST SOLUTION
+python `openrave-config --python-dir`/openravepy/_openravepy_/ikfast.py --robot=dual_arm_robot.rounded.dae --iktype=transform6d --baselink=8 --eelink=16 --savefile=ikfast61_ur10_manipulator.cpp
+
+CREATE PLUGIN
+catkin_create_pkg dual_arm_robot_ik_fast_ur10_manipulator_plugin
+
+GENERATE CODE FOR PLUGIN (move ikfast61_ur10.cpp first)
+rosrun moveit_ikfast create_ikfast_moveit_plugin.py dual_arm_robot ur10_manipulator dual_arm_robot_ik_fast_ur10_manipulator_plugin src/ikfast61_ur10.cpp
+
+
+
+WEBSITE:
+http://docs.ros.org/indigo/api/moveit_tutorials/html/doc/ikfast_tutorial.html?highlight=fast
+
+TO UPDATE CHANGES EASILY:
+update_ikfast_plugin.sh
+
+???
+export OPENRAVE_PLUGINS="/home/daniel/catkin_ws/devel/share/openrave-0.9/plugins"
+
+
+DID NOT WORK
+[plugindatabase.h:577 Create] Failed to create name fcl_, interface collisionchecker
+[plugindatabase.h:577 Create] Failed to create name ode, interface collisionchecker
+

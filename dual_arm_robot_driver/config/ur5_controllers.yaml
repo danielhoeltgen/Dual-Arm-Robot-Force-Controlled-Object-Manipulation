@@ -1,0 +1,108 @@
+# Settings for ros_control control loop
+hardware_control_loop:
+   loop_hz: 125
+
+# Settings for ros_control hardware interface
+hardware_interface:
+   joints:
+     - ur5_shoulder_pan_joint
+     - ur5_shoulder_lift_joint
+     - ur5_elbow_joint
+     - ur5_wrist_1_joint
+     - ur5_wrist_2_joint
+     - ur5_wrist_3_joint
+
+# Publish all joint states ----------------------------------
+ur5_joint_state_controller:
+   type:         joint_state_controller/JointStateController
+   publish_rate: 125
+
+# Publish wrench ----------------------------------
+ur5_force_torque_sensor_controller:
+   type:         force_torque_sensor_controller/ForceTorqueSensorController
+   publish_rate: 125
+   
+# Joint Trajectory Controller - velocity based -------------------------------
+# For detailed explanations of parameter see http://wiki.ros.org/
+ur5_vel_based_pos_traj_controller:
+   type: velocity_controllers/JointTrajectoryController
+   joints:
+     - ur5_shoulder_pan_joint
+     - ur5_shoulder_lift_joint
+     - ur5_elbow_joint
+     - ur5_wrist_1_joint
+     - ur5_wrist_2_joint
+     - ur5_wrist_3_joint
+   constraints:
+      goal_time: 0.6
+      stopped_velocity_tolerance: 0.05
+      ur5_shoulder_pan_joint: {trajectory: 0.1, goal: 0.1}
+      ur5_shoulder_lift_joint: {trajectory: 0.1, goal: 0.1}
+      ur5_elbow_joint: {trajectory: 0.1, goal: 0.1}
+      ur5_wrist_1_joint: {trajectory: 0.1, goal: 0.1}
+      ur5_wrist_2_joint: {trajectory: 0.1, goal: 0.1}
+      ur5_wrist_3_joint: {trajectory: 0.1, goal: 0.1}
+   stop_trajectory_duration: 0.5
+   state_publish_rate:  125
+   action_monitor_rate: 10
+   gains:
+      #!!These values are useable, but maybe not optimal, default: p:1.2
+      ur5_shoulder_pan_joint: {p: 20,  i: 0.0, d: 0.1, i_clamp: 1}
+      ur5_shoulder_lift_joint: {p: 20,  i: 0.0, d: 0.1, i_clamp: 1}
+      ur5_elbow_joint: {p: 20,  i: 0.0, d: 0.1, i_clamp: 1}
+      ur5_wrist_1_joint: {p: 20,  i: 0.0, d: 0.1, i_clamp: 1}
+      ur5_wrist_2_joint: {p: 20,  i: 0.0, d: 0.1, i_clamp: 1}
+      ur5_wrist_3_joint: {p: 20,  i: 0.0, d: 0.1, i_clamp: 1}
+
+   # state_publish_rate:  50 # Defaults to 50
+   # action_monitor_rate: 20 # Defaults to 20
+   #hold_trajectory_duration: 0 # Defaults to 0.5
+
+# Joint Trajectory Controller -------------------------------
+# For detailed explanations of parameter see http://wiki.ros.org/
+ur5_vel_based_admittance_traj_controller:
+   type: velocity_controllers/JointTrajectoryAdmittanceController
+   root_name: ur5_base
+   tip_name: ur5_tool0
+   contact_force: 30 #[N]
+   max_velocity: 0.2
+   max_shift: 0.15
+   wrench_topic: /ur5/wrench
+   wrench_tolerance: 0 #5
+   admittance_pid:
+      p: 0.0005
+      i: 0.0000
+      d: 0.0000
+      i_clamp_min: -0.0001
+      i_clamp_max: 0.0001
+   joints:
+     - ur5_shoulder_pan_joint
+     - ur5_shoulder_lift_joint
+     - ur5_elbow_joint
+     - ur5_wrist_1_joint
+     - ur5_wrist_2_joint
+     - ur5_wrist_3_joint
+   constraints:
+      goal_time: 0.6
+      stopped_velocity_tolerance: 0.05
+      ur5_shoulder_pan_joint: {trajectory: 0.1, goal: 0.1}
+      ur5_shoulder_lift_joint: {trajectory: 0.1, goal: 0.1}
+      ur5_elbow_joint: {trajectory: 0.1, goal: 0.1}
+      ur5_wrist_1_joint: {trajectory: 0.1, goal: 0.1}
+      ur5_wrist_2_joint: {trajectory: 0.1, goal: 0.1}
+      ur5_wrist_3_joint: {trajectory: 0.1, goal: 0.1}
+   stop_trajectory_duration: 0.5
+   state_publish_rate:  125
+   action_monitor_rate: 10
+   gains:
+      #!!These values are useable, but maybe not optimal, default: p:1.2
+      ur5_shoulder_pan_joint: {p: 20,  i: 0.0, d: 0.1, i_clamp: 1}
+      ur5_shoulder_lift_joint: {p: 20,  i: 0.0, d: 0.1, i_clamp: 1}
+      ur5_elbow_joint: {p: 20,  i: 0.0, d: 0.1, i_clamp: 1}
+      ur5_wrist_1_joint: {p: 20,  i: 0.0, d: 0.1, i_clamp: 1}
+      ur5_wrist_2_joint: {p: 20,  i: 0.0, d: 0.1, i_clamp: 1}
+      ur5_wrist_3_joint: {p: 20,  i: 0.0, d: 0.1, i_clamp: 1}
+
+   # state_publish_rate:  50 # Defaults to 50
+   # action_monitor_rate: 20 # Defaults to 20
+   #hold_trajectory_duration: 0 # Defaults to 0.5

@@ -1,0 +1,112 @@
+# Settings for ros_control control loop
+hardware_control_loop:
+   loop_hz: 125
+
+# Settings for ros_control hardware interface
+hardware_interface:
+   joints:
+     - ur10_shoulder_pan_joint
+     - ur10_shoulder_lift_joint
+     - ur10_elbow_joint
+     - ur10_wrist_1_joint
+     - ur10_wrist_2_joint
+     - ur10_wrist_3_joint
+
+# Publish all joint states ----------------------------------
+ur10_joint_state_controller:
+   type:         joint_state_controller/JointStateController
+   publish_rate: 125
+
+# Publish wrench ----------------------------------
+ur10_force_torque_sensor_controller:
+   type:         force_torque_sensor_controller/ForceTorqueSensorController
+   publish_rate: 125
+
+   
+# Joint Trajectory Controller -------------------------------
+# For detailed explanations of parameter see http://wiki.ros.org/
+ur10_vel_based_pos_traj_controller:
+   type: velocity_controllers/JointTrajectoryController
+   joints:
+     - ur10_shoulder_pan_joint
+     - ur10_shoulder_lift_joint
+     - ur10_elbow_joint
+     - ur10_wrist_1_joint
+     - ur10_wrist_2_joint
+     - ur10_wrist_3_joint
+   constraints:
+      goal_time: 0.6
+      stopped_velocity_tolerance: 0.05
+      ur10_shoulder_pan_joint: {trajectory: 0.1, goal: 0.1}
+      ur10_shoulder_lift_joint: {trajectory: 0.1, goal: 0.1}
+      ur10_elbow_joint: {trajectory: 0.1, goal: 0.1}
+      ur10_wrist_1_joint: {trajectory: 0.1, goal: 0.1}
+      ur10_wrist_2_joint: {trajectory: 0.1, goal: 0.1}
+      ur10_wrist_3_joint: {trajectory: 0.1, goal: 0.1}
+   stop_trajectory_duration: 0.5
+   state_publish_rate:  125
+   action_monitor_rate: 10
+   gains:
+       #!!These values are useable, but maybe not optimal
+      ur10_shoulder_pan_joint: {p: 20.0,  i: 0.0, d: 0.1, i_clamp: 1}
+      ur10_shoulder_lift_joint: {p: 20.0,  i: 0.0, d: 0.1, i_clamp: 1}
+      ur10_elbow_joint: {p: 20.0,  i: 0.0, d: 0.1, i_clamp: 1}
+      ur10_wrist_1_joint: {p: 20.0,  i: 0.0, d: 0.1, i_clamp: 1}
+      ur10_wrist_2_joint: {p: 20.0,  i: 0.0, d: 0.1, i_clamp: 1}
+      ur10_wrist_3_joint: {p: 20.0,  i: 0.0, d: 0.1, i_clamp: 1}
+
+
+   # state_publish_rate:  50 # Defaults to 50
+   # action_monitor_rate: 20 # Defaults to 20
+   #hold_trajectory_duration: 0 # Defaults to 0.5
+
+# Joint Trajectory Controller -------------------------------
+# For detailed explanations of parameter see http://wiki.ros.org/
+ur10_vel_based_admittance_traj_controller:
+   type: velocity_controllers/JointTrajectoryAdmittanceController
+   root_name: ur10_base
+   tip_name: ur10_tool0
+   contact_force: 25 #[N]
+   max_velocity: 0.2
+   max_shift: 0.05
+   wrench_topic: /ur10/wrench
+   wrench_tolerance: 5
+   admittance_pid:
+      p: 0.0005
+      i: 0.0000
+      d: 0.0000
+      i_clamp_min: -0.0001
+      i_clamp_max: 0.0001
+   joints:
+     - ur10_shoulder_pan_joint
+     - ur10_shoulder_lift_joint
+     - ur10_elbow_joint
+     - ur10_wrist_1_joint
+     - ur10_wrist_2_joint
+     - ur10_wrist_3_joint
+   constraints:
+      goal_time: 0.6
+      stopped_velocity_tolerance: 0.05
+      ur10_shoulder_pan_joint: {trajectory: 0.1, goal: 0.1}
+      ur10_shoulder_lift_joint: {trajectory: 0.1, goal: 0.1}
+      ur10_elbow_joint: {trajectory: 0.1, goal: 0.1}
+      ur10_wrist_1_joint: {trajectory: 0.1, goal: 0.1}
+      ur10_wrist_2_joint: {trajectory: 0.1, goal: 0.1}
+      ur10_wrist_3_joint: {trajectory: 0.1, goal: 0.1}
+   stop_trajectory_duration: 0.5
+   state_publish_rate:  125
+   action_monitor_rate: 10
+   gains:
+       #!!These values are useable, but maybe not optimal
+      ur10_shoulder_pan_joint: {p: 20.0,  i: 0.0, d: 0.1, i_clamp: 1}
+      ur10_shoulder_lift_joint: {p: 20.0,  i: 0.0, d: 0.1, i_clamp: 1}
+      ur10_elbow_joint: {p: 20.0,  i: 0.0, d: 0.1, i_clamp: 1}
+      ur10_wrist_1_joint: {p: 20.0,  i: 0.0, d: 0.1, i_clamp: 1}
+      ur10_wrist_2_joint: {p: 20.0,  i: 0.0, d: 0.1, i_clamp: 1}
+      ur10_wrist_3_joint: {p: 20.0,  i: 0.0, d: 0.1, i_clamp: 1}
+
+
+   # state_publish_rate:  50 # Defaults to 50
+   # action_monitor_rate: 20 # Defaults to 20
+   #hold_trajectory_duration: 0 # Defaults to 0.5
+

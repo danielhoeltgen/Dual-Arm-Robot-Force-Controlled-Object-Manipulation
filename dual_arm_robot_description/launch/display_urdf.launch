@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!-- 
+usage example
+roslaunch dual_arm_robot_description display_urdf.launch model:='$(find dual_arm_robot_description)/urdf/dual_arm_robot.urdf'
+-->
+<launch>
+	<arg name="model" />
+	<arg name="gui" default="False" />
+
+	<param name="robot_description" textfile="$(arg model)" />
+	<param name="use_gui" value="$(arg gui)"/>
+	
+	<node name="rviz" pkg="rviz" type="rviz"/>
+ 
+</launch>

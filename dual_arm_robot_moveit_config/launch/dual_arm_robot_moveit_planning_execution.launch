@@ -1,0 +1,13 @@
+<launch>
+  <arg name="sim" default="false" />
+  <arg name="debug" default="false" />
+    
+  <!-- Remap follow_joint_trajectory -->
+  <remap if="$(arg sim)" from="ur5/ur5_vel_based_pos_traj_controller/follow_joint_trajectory" to="fake_ur5_manipulator_controller/follow_joint_trajectory"/>
+  <remap if="$(arg sim)" from="ur10/ur10_vel_based_pos_traj_controller/follow_joint_trajectory" to="fake_ur10_manipulator_controller/follow_joint_trajectory"/>
+
+  <!-- Launch moveit -->
+  <include file="$(find dual_arm_robot_moveit_config)/launch/move_group.launch">
+    <arg name="debug" default="$(arg debug)" />
+  </include>
+</launch>

@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <arg name="ip_ur5" default="10.64.9.82"/>
+  <arg name="ip_ur10" default="10.64.9.83"/>
+  <arg name="limited_ur5" default="false"/>
+  <arg name="limited_ur10" default="false"/>
+  <arg name="min_payload_ur5"  default="0.0"/>
+  <arg name="max_payload_ur5"  default="5.0"/>
+  <arg name="min_payload_ur10"  default="0.0"/>
+  <arg name="max_payload_ur10"  default="10.0"/>
+  <arg name="prefix_ur5" default="ur5_" />
+  <arg name="prefix_ur10" default="ur10_" />
+  <arg name="controller_name_ur5" default="ur5"/>
+  <arg name="controller_name_ur10" default="ur10"/>
+
+  <!-- dual_arm_robot model -->
+  <include file="$(find dual_arm_robot_description)/launch/dual_arm_robot_upload.launch">
+    <arg name="limited_ur5" value="$(arg limited_ur5)"/>
+    <arg name="prefix_ur5" value="$(arg prefix_ur5)"/>
+    <arg name="limited_ur10" value="$(arg limited_ur10)"/>
+    <arg name="prefix_ur10" value="$(arg prefix_ur10)"/>
+  </include>
+  
+  <!-- ur5 common -->
+  <group ns="$(arg controller_name_ur5)">
+    <remap from="joint_states" to="/joint_states"/>
+    <include file="$(find ur_modern_driver)/launch/ur_common.launch">
+      <arg name="prefix"  value="$(arg prefix_ur5)" />
+      <arg name="robot_ip" value="$(arg ip_ur5)"/>
+      <arg name="min_payload"  value="$(arg min_payload_ur5)"/>
+      <arg name="max_payload"  value="$(arg max_payload_ur5)"/>
+    </include>
+  </group>
+
+  <!-- ur10 common -->
+  <group ns="$(arg controller_name_ur10)">
+    <param name="ur_driver/reverse_port" type="int" value="5002"/> <!-- must be set different to the instance of the ur5, default is 5001-->
+    <remap from="joint_states" to="/joint_states"/>
+    <include file="$(find ur_modern_driver)/launch/ur_common.launch">
+      <arg name="prefix"  value="$(arg prefix_ur10)" />
+      <arg name="robot_ip" value="$(arg ip_ur10)"/>
+      <arg name="min_payload"  value="$(arg min_payload_ur10)"/>
+      <arg name="max_payload"  value="$(arg max_payload_ur10)"/>
+    </include>
+  </group>
+
+</launch>

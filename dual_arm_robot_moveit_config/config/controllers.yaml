@@ -1,0 +1,65 @@
+### ros-control settings:
+controller_list:
+  - name: ur5/ur5_vel_based_pos_traj_controller #or pos_based_pos_traj_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    joints:
+      - ur5_shoulder_pan_joint
+      - ur5_shoulder_lift_joint
+      - ur5_elbow_joint
+      - ur5_wrist_1_joint
+      - ur5_wrist_2_joint
+      - ur5_wrist_3_joint
+#  - name: ur5/ur5_vel_based_admittance_traj_controller #or pos_based_pos_traj_controller
+#    action_ns: follow_joint_trajectory
+#    type: FollowJointTrajectory
+#    joints:
+#      - ur5_shoulder_pan_joint
+#      - ur5_shoulder_lift_joint
+#      - ur5_elbow_joint
+#      - ur5_wrist_1_joint
+#      - ur5_wrist_2_joint
+#      - ur5_wrist_3_joint
+  - name: ur10/ur10_vel_based_pos_traj_controller #or pos_based_pos_traj_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    joints:
+      - ur10_shoulder_pan_joint
+      - ur10_shoulder_lift_joint
+      - ur10_elbow_joint
+      - ur10_wrist_1_joint
+      - ur10_wrist_2_joint
+      - ur10_wrist_3_joint
+#  - name: ur10/ur10_vel_based_admittance_traj_controller #or pos_based_pos_traj_controller
+#    action_ns: follow_joint_trajectory
+#    type: FollowJointTrajectory
+#    joints:
+#      - ur10_shoulder_pan_joint
+#      - ur10_shoulder_lift_joint
+#      - ur10_elbow_joint
+#      - ur10_wrist_1_joint
+#      - ur10_wrist_2_joint
+#      - ur10_wrist_3_joint
+
+### without ros-control:
+#controller_list:
+#  - name: ur5
+#    action_ns: follow_joint_trajectory
+#    type: FollowJointTrajectory
+#    joints:
+#      - ur5_shoulder_pan_joint
+#      - ur5_shoulder_lift_joint
+#      - ur5_elbow_joint
+#      - ur5_wrist_1_joint
+#      - ur5_wrist_2_joint
+#      - ur5_wrist_3_joint
+#  - name: ur10
+#    action_ns: follow_joint_trajectory
+#    type: FollowJointTrajectory
+#    joints:
+#      - ur10_shoulder_pan_joint
+#      - ur10_shoulder_lift_joint
+#      - ur10_elbow_joint
+#      - ur10_wrist_1_joint
+#      - ur10_wrist_2_joint
+#      - ur10_wrist_3_joint

@@ -1,0 +1,45 @@
+fake_interpolating_controller_rate: 10 (Hz)
+controller_list:
+  - name: fake_ur5_manipulator_controller
+    type: interpolate   #interpolate | via points | last point
+    joints:
+      - ur5_shoulder_pan_joint
+      - ur5_shoulder_lift_joint
+      - ur5_elbow_joint
+      - ur5_wrist_1_joint
+      - ur5_wrist_2_joint
+      - ur5_wrist_3_joint
+  - name: fake_ur10_manipulator_controller
+    type: interpolate
+    joints:
+      - ur10_shoulder_pan_joint
+      - ur10_shoulder_lift_joint
+      - ur10_elbow_joint
+      - ur10_wrist_1_joint
+      - ur10_wrist_2_joint
+      - ur10_wrist_3_joint
+  - name: fake_ur5_endeffector_controller
+    joints:
+      []
+  - name: fake_ur10_endeffector_controller
+    joints:
+      []
+initial:
+  - group: arms
+    pose:  arms_up
+
+
+#  - name: fake_arms_controller
+#    joints:
+#      - ur10_shoulder_pan_joint
+#      - ur10_shoulder_lift_joint
+#      - ur10_elbow_joint
+#      - ur10_wrist_1_joint
+#      - ur10_wrist_2_joint
+#      - ur10_wrist_3_joint
+#      - ur5_shoulder_pan_joint
+#      - ur5_shoulder_lift_joint
+#      - ur5_elbow_joint
+#      - ur5_wrist_1_joint
+#      - ur5_wrist_2_joint
+#      - ur5_wrist_3_joint

@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<robot xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+       xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+       xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+       xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:macro name="table">
+  <link name="table_ground">
+    <visual>
+      <geometry>
+        <mesh filename="package://dual_arm_robot_description/meshes/table/table_ground.stl"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <collision>
+      <geometry>
+        <mesh filename="package://dual_arm_robot_description/meshes/table/table_ground.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="table_side_left">
+    <visual>
+      <geometry>
+        <mesh filename="package://dual_arm_robot_description/meshes/table/table_side.stl"/>
+      </geometry>
+      <material name="glass">
+        <color rgba="0 0 1 0.5"/>
+      </material>
+    </visual>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <collision>
+      <geometry>
+        <mesh filename="package://dual_arm_robot_description/meshes/table/table_side.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="table_ground_to_side_left" type="fixed">
+    <parent link="table_ground"/>
+    <child link="table_side_left"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+
+  <link name="table_side_right">
+    <visual>
+      <geometry>
+        <mesh filename="package://dual_arm_robot_description/meshes/table/table_side.stl"/>
+      </geometry>
+      <material name="glass"/>
+    </visual>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <collision>
+      <geometry>
+        <mesh filename="package://dual_arm_robot_description/meshes/table/table_side.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="table_ground_to_side_right" type="fixed">
+    <parent link="table_ground"/>
+    <child link="table_side_right"/>
+    <origin xyz="1.585 0 0"/>
+  </joint>
+
+  <link name="table_back">
+    <visual>
+      <geometry>
+        <mesh filename="package://dual_arm_robot_description/meshes/table/table_back.stl"/>
+      </geometry>
+    <material name="white"/>
+    </visual>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <collision>
+      <geometry>
+        <mesh filename="package://dual_arm_robot_description/meshes/table/table_back.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="table_ground_to_back" type="fixed">
+    <parent link="table_ground"/>
+    <child link="table_back"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+
+  <link name="table_front">
+    <visual>
+      <geometry>
+        <mesh filename="package://dual_arm_robot_description/meshes/table/table_front.stl"/>
+      </geometry>
+    <material name="glass"/>
+    </visual>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <collision>
+      <geometry>
+        <mesh filename="package://dual_arm_robot_description/meshes/table/table_front.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="table_ground_to_front" type="fixed">
+    <parent link="table_ground"/>
+    <child link="table_front"/>
+    <origin xyz="0 -1.319 0"/>
+  </joint>
+
+  <link name="table_camerahanger">
+    <visual>
+      <geometry>
+        <mesh filename="package://dual_arm_robot_description/meshes/table/table_camerahanger.stl"/>
+      </geometry>
+    <material name="aluminium">
+      <color rgba="0.5 0.5 0.5 1"/>
+    </material>
+    </visual>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <collision>
+      <geometry>
+        <mesh filename="package://dual_arm_robot_description/meshes/table/table_camerahanger.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="table_ground_to_camerahanger" type="fixed">
+    <parent link="table_ground"/>
+    <child link="table_camerahanger"/>
+<!--origin xyz="0.8 0.019 0"-->
+    <origin xyz="0.84 0.019 0.04"/>
+  </joint>
+
+  <link name="$(arg prefix_ur5)table_platform">
+    <visual>
+      <geometry>
+        <mesh filename="package://dual_arm_robot_description/meshes/table/table_platform_ur5.stl"/>
+      </geometry>
+    <material name="steel">
+      <color rgba="0.4 0.4 0.4 1"/>
+    </material>
+    </visual>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <collision>
+      <geometry>
+        <mesh filename="package://dual_arm_robot_description/meshes/table/table_platform_ur5.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="$(arg prefix_ur5)table_ground_to_platform" type="fixed">
+    <parent link="table_ground"/>
+    <child link="$(arg prefix_ur5)table_platform"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+
+  <link name="$(arg prefix_ur10)table_platform">
+    <visual>
+      <geometry>
+        <mesh filename="package://dual_arm_robot_description/meshes/table/table_platform_ur10.stl"/>
+      </geometry>
+    <material name="steel"/>
+    </visual>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <collision>
+      <geometry>
+        <mesh filename="package://dual_arm_robot_description/meshes/table/table_platform_ur10.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="$(arg prefix_ur10)table_ground_to_platform" type="fixed">
+    <parent link="table_ground"/>
+    <child link="$(arg prefix_ur10)table_platform"/>
+    <origin xyz="1.076 0 0"/>
+  </joint>
+
+  </xacro:macro>
+
+</robot>

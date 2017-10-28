@@ -1,0 +1,66 @@
+<package>
+  <name>joint_trajectory_admittance_controller</name>
+  <description> Controller for executing joint-space trajectories on a group of joints. </description>
+  <version>0.9.3</version>
+
+  <maintainer email="daniel.hoeltgen@googlemail.com">Daniel Höltgen</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website">https://github.com/ros-controls/ros_controllers/wiki</url>
+  <url type="bugtracker">https://github.com/ros-controls/ros_controllers/issues</url>
+  <url type="repository">https://github.com/ros-controls/ros_controllers</url>
+
+  <author>Daniel Höltgen</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>cmake_modules</build_depend>
+  <build_depend>actionlib</build_depend>
+  <build_depend>angles</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>urdf</build_depend>
+
+  <build_depend>control_toolbox</build_depend>
+  <build_depend>controller_interface</build_depend>
+  <build_depend>hardware_interface</build_depend>
+  <build_depend>realtime_tools</build_depend>
+
+  <build_depend>control_msgs</build_depend>
+  <build_depend>trajectory_msgs</build_depend>
+
+  <build_depend>rostest</build_depend>            <!--Tests-only!-->
+  <build_depend>controller_manager</build_depend> <!--Tests-only!-->
+  <build_depend>xacro</build_depend>              <!--Tests-only!-->
+
+  <build_depend>pluginlib</build_depend>
+
+  <build_depend>kdl</build_depend>
+
+
+  <run_depend>actionlib</run_depend>
+  <run_depend>angles</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>urdf</run_depend>
+
+  <run_depend>control_toolbox</run_depend>
+  <run_depend>controller_interface</run_depend>
+  <run_depend>hardware_interface</run_depend>
+  <run_depend>realtime_tools</run_depend>
+
+  <run_depend>control_msgs</run_depend>
+  <run_depend>trajectory_msgs</run_depend>
+
+  <run_depend>rostest</run_depend>            <!--Tests-only!-->
+  <run_depend>controller_manager</run_depend> <!--Tests-only!-->
+  <run_depend>xacro</run_depend>              <!--Tests-only!-->
+  <run_depend>rqt_plot</run_depend>           <!--Tests-only!-->
+
+  <run_depend>pluginlib</run_depend>
+
+  <run_depend>kdl</run_depend>
+
+  <export>
+    <controller_interface plugin="${prefix}/controller_plugins.xml" />
+  </export>
+</package>
