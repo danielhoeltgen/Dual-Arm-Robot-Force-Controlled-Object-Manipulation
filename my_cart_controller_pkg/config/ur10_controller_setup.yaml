@@ -1,0 +1,29 @@
+my_controller:
+   type: my_cart_controller_pkg/MyCartControllerPlugin
+   joints:
+     - shoulder_pan_joint
+     - shoulder_lift_joint
+     - elbow_joint
+     - wrist_1_joint
+     - wrist_2_joint
+     - wrist_3_joint
+   constraints:
+      goal_time: 0.6
+      stopped_velocity_tolerance: 0.05
+      shoulder_pan_joint: {trajectory: 0.1, goal: 0.1}
+      shoulder_lift_joint: {trajectory: 0.1, goal: 0.1}
+      elbow_joint: {trajectory: 0.1, goal: 0.1}
+      wrist_1_joint: {trajectory: 0.1, goal: 0.1}
+      wrist_2_joint: {trajectory: 0.1, goal: 0.1}
+      wrist_3_joint: {trajectory: 0.1, goal: 0.1}
+   stop_trajectory_duration: 0.5
+   state_publish_rate:  125
+   action_monitor_rate: 10
+   gains:
+       #!!These values are useable, but maybe not optimal
+      shoulder_pan_joint: {p: 20.0,  i: 0.0, d: 0.1, i_clamp: 1}
+      shoulder_lift_joint: {p: 20.0,  i: 0.0, d: 0.1, i_clamp: 1}
+      elbow_joint: {p: 20.0,  i: 0.0, d: 0.1, i_clamp: 1}
+      wrist_1_joint: {p: 20.0,  i: 0.0, d: 0.1, i_clamp: 1}
+      wrist_2_joint: {p: 20.0,  i: 0.0, d: 0.1, i_clamp: 1}
+      wrist_3_joint: {p: 20.0,  i: 0.0, d: 0.1, i_clamp: 1}

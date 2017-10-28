@@ -1,0 +1,5 @@
+<library path="lib/libmy_cart_controller_lib">
+  <class name="my_cart_controller_pkg/MyCartControllerPlugin" 
+         type="controller_ns::CartController"           
+         base_class_type="controller_interface::ControllerBase" />
+</library>

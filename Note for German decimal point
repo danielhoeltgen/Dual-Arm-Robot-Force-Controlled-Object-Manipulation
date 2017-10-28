@@ -1,0 +1,2 @@
+Um bei dem Moveit! Setup Assistenten das korrekte Dezimaltrennzeichen zu verwenden muss dieser Befehl eingegeben werden. Andernfalls werden Dezimalzahlen falsch gespeichert.
+export LC_NUMERIC=C
