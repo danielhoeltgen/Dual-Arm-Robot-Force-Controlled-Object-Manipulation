@@ -20,4 +20,4 @@ joint_trajectory_admittance_controller: This package contains the source code of
 
 
 # Documentation:
-For German speakers my master's thesis provides more detailed information. For everyone else I hope some of the diagrams are useful!
+For German speakers my master's thesis provides detailed information. For everyone else I hope some of the diagrams are useful!
