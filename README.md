@@ -15,7 +15,7 @@ joint_trajectory_admittance_controller: This package contains the source code of
 
 
 # Run demonstration:
-1. roslaunch dual_arm_robot_ros_control_rviz.launch
+1. roslaunch dual_arm_robot_ros_control_rviz.launch/dual_arm_robot_offline_rviz.launch
 2. rosrun dual_arm_robot_demonstration
 
 
